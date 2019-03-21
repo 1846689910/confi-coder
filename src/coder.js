@@ -58,5 +58,6 @@ async function coder(key, from, to) {
 module.exports = {
   default: coder,
   decode,
-  encode
+  encode,
+  resolveKey
 };
