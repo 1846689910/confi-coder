@@ -38,3 +38,15 @@ set CODER_KEY=... & npm run decode
 + `ENCODED_PATH`: the encoded file path. default should be in `lib`, which will be checked in github
 + `DECODED_PATH`: the decoded file path. default should be in `dist`, which will be ignored by github
 + `CODER_KEY`: the priority of `CODER_KEY`: explicit key > `process.env` > `config.KEY`
+
+## example
+clone the project, and run
+```bash
+npm run decode
+```
+check the `dist/concise.html`
+
+## test
+```bash
+npm test
+```
