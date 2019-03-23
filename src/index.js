@@ -5,7 +5,11 @@ const getTask = () => {
     const s = x.toUpperCase();
     return s === "--DECODE" || s === "--ENCODE";
   });
-  return task && task.toUpperCase();
+  if (task) {
+    return task.toUpperCase();
+  } else {
+    throw new Error("Task Mode Missing: --decode or --encode");
+  }
 };
 
 const main = async () => {
@@ -13,10 +17,8 @@ const main = async () => {
 
   if (task === "--DECODE") {
     decode();
-  } else if (task === "--ENCODE") {
-    encode();
   } else {
-    throw new Error("Task Mode Missing: --decode or --encode");
+    encode();
   }
 };
 
