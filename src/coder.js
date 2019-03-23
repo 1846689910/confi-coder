@@ -27,7 +27,7 @@ async function decode() {
       throw err;
     });
   }
-  coder(resolveKey(), ENCODED_PATH, DECODED_PATH);
+  return coder(resolveKey(), ENCODED_PATH, DECODED_PATH);
 }
 
 async function encode() {
@@ -39,7 +39,7 @@ async function encode() {
       throw err;
     });
   }
-  coder(resolveKey(), DECODED_PATH, ENCODED_PATH);
+  return coder(resolveKey(), DECODED_PATH, ENCODED_PATH);
 }
 
 async function coder(key, from, to) {
@@ -53,6 +53,7 @@ async function coder(key, from, to) {
     throw err;
   });
   console.log(`${fgGreen}${fgBright}   -- finished${reset}`);
+  return "finished";
 }
 
 module.exports = {

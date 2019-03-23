@@ -36,25 +36,15 @@ describe("coder", () => {
       expect(resolveKey).to.throw();
     });
   });
+
+  const decodedPath = Path.resolve("test", "__dist", "a.txt");
+  const encodedPath = Path.resolve("test", "__lib", "a.encoded.txt");
   describe("function decode", () => {
-    const decodedPath = Path.resolve("test", "__dist", "a.txt");
-    const encodedPath = Path.resolve("test", "__lib", "a.encoded.txt");
     before(() => {
       const _config = require("../src/config");
       fakeConfig = sinon.stub(_config, "KEY").value("key");
       fakeConfig = sinon.stub(_config, "DECODED_PATH").value(decodedPath);
       fakeConfig = sinon.stub(_config, "ENCODED_PATH").value(encodedPath);
-    });
-    after(() => {
-      if (fakeConfig) {
-        fakeConfig.restore();
-        fakeConfig = null;
-      }
-    });
-    afterEach(() => {
-      Object.keys(require.cache).forEach(key => delete require.cache[key]);
-      if (Fs.existsSync(encodedPath)) Fs.unlink(encodedPath);
-      if (Fs.existsSync(decodedPath)) Fs.unlink(decodedPath);
     });
     it("should throw error when encodedPath does not exist", async () => {
       const { decode } = require("../src/coder");
@@ -62,6 +52,21 @@ describe("coder", () => {
       await decode().catch(e => (err = e));
       expect(err).to.exist;
       expect(err.message).to.equal(`${encodedPath} is missing`);
+    });
+  });
+  describe("function encode", () => {
+    before(() => {
+      const _config = require("../src/config");
+      fakeConfig = sinon.stub(_config, "KEY").value("key");
+      fakeConfig = sinon.stub(_config, "DECODED_PATH").value(decodedPath);
+      fakeConfig = sinon.stub(_config, "ENCODED_PATH").value(encodedPath);
+    });
+    it("should throw error when decodedPath does not exist", async () => {
+      const { encode } = require("../src/coder");
+      let err;
+      await encode().catch(e => (err = e));
+      expect(err).to.exist;
+      expect(err.message).to.equal(`${decodedPath} is missing`);
     });
   });
 });
