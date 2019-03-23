@@ -11,14 +11,18 @@ const fgGreen = "\x1b[32m";
 const fgBright = "\x1b[1m";
 const reset = "\x1b[0m";
 
-function resolveKey() {
+/**
+ * resolve `CODER_KEY`, priority order: argument key > process.env.CODER_KEY > config.KEY
+ */
+function resolveKey(key) {
+  if (key) return key;
   const { CODER_KEY } = process.env;
-  const key = CODER_KEY || KEY;
+  key = CODER_KEY || KEY;
   if (!key) throw new Error("Please give CODER_KEY or configure KEY in config.js");
   return key;
 }
 
-async function decode(encodedPath = ENCODED_PATH, decodedPath = DECODED_PATH) {
+async function decode(encodedPath = ENCODED_PATH, decodedPath = DECODED_PATH, key = KEY) {
   if (!Fs.existsSync(encodedPath)) {
     throw new Error(`${encodedPath} is missing`);
   }
@@ -27,10 +31,10 @@ async function decode(encodedPath = ENCODED_PATH, decodedPath = DECODED_PATH) {
       throw err;
     });
   }
-  return coder(resolveKey(), encodedPath, decodedPath);
+  return coder(resolveKey(key), encodedPath, decodedPath);
 }
 
-async function encode(decodedPath = DECODED_PATH, encodedPath = ENCODED_PATH) {
+async function encode(decodedPath = DECODED_PATH, encodedPath = ENCODED_PATH, key = KEY) {
   if (!Fs.existsSync(decodedPath)) {
     throw new Error(`${decodedPath} is missing`);
   }
@@ -39,7 +43,7 @@ async function encode(decodedPath = DECODED_PATH, encodedPath = ENCODED_PATH) {
       throw err;
     });
   }
-  return coder(resolveKey(), decodedPath, encodedPath);
+  return coder(resolveKey(key), decodedPath, encodedPath);
 }
 
 async function coder(key, from, to) {

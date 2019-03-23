@@ -1,7 +1,7 @@
 const Path = require("path");
 const { expect } = require("chai");
 const sinon = require("sinon");
-const Fs = require("fs");
+
 /**
  * 1 自定义的需要有方法或属性被stub的module，和需要被test的并且使用前者module的module最好都能在自己的case中require，否则可能会无法正确替换
  * 2 需要被测试的module需要在stub之后再引入
