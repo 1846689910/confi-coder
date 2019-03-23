@@ -18,28 +18,28 @@ function resolveKey() {
   return key;
 }
 
-async function decode() {
-  if (!Fs.existsSync(ENCODED_PATH)) {
-    throw new Error(`${ENCODED_PATH} is missing`);
+async function decode(encodedPath = ENCODED_PATH, decodedPath = DECODED_PATH) {
+  if (!Fs.existsSync(encodedPath)) {
+    throw new Error(`${encodedPath} is missing`);
   }
-  if (!Fs.existsSync(DECODED_PATH)) {
-    await mkdir(Path.dirname(DECODED_PATH), { recursive: true }).catch(err => {
+  if (!Fs.existsSync(decodedPath)) {
+    await mkdir(Path.dirname(decodedPath), { recursive: true }).catch(err => {
       throw err;
     });
   }
-  return coder(resolveKey(), ENCODED_PATH, DECODED_PATH);
+  return coder(resolveKey(), encodedPath, decodedPath);
 }
 
-async function encode() {
-  if (!Fs.existsSync(DECODED_PATH)) {
-    throw new Error(`${DECODED_PATH} is missing`);
+async function encode(decodedPath = DECODED_PATH, encodedPath = ENCODED_PATH) {
+  if (!Fs.existsSync(decodedPath)) {
+    throw new Error(`${decodedPath} is missing`);
   }
-  if (!Fs.existsSync(ENCODED_PATH)) {
-    await mkdir(Path.dirname(ENCODED_PATH), { recursive: true }).catch(err => {
+  if (!Fs.existsSync(encodedPath)) {
+    await mkdir(Path.dirname(encodedPath), { recursive: true }).catch(err => {
       throw err;
     });
   }
-  return coder(resolveKey(), DECODED_PATH, ENCODED_PATH);
+  return coder(resolveKey(), decodedPath, encodedPath);
 }
 
 async function coder(key, from, to) {
