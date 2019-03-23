@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "decode": "node src --decode",
+    "encode": "node src --encode"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/1846689910/Countenance/issues"
   },
-  "homepage": "https://github.com/1846689910/Countenance#readme"
+  "homepage": "https://github.com/1846689910/Countenance#readme",
+  "devDependencies": {
+    "bluebird": "^3.5.3",
+    "chai": "^4.2.0",
+    "md5.js": "^1.3.5",
+    "mocha": "^6.0.2",
+    "sinon": "^7.2.7"
+  }
 }
