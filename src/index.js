@@ -7,7 +7,6 @@ const main = async () => {
   const to = getTo();
 
   if (task === "--DECODE") {
-    console.log([from, to]);
     decode(from, to);
   } else {
     encode(from, to);

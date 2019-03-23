@@ -12,7 +12,6 @@ function getTask() {
 
 function getFrom() {
   const from = process.argv.slice(2).find(x => x.toUpperCase().startsWith("FROM"));
-  console.log(process.argv);
   return from && from.split("=")[1];
 }
 
