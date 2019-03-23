@@ -11,12 +11,13 @@ function getTask() {
 }
 
 function getFrom() {
-  const from = process.argv.slice(2).find(x => x.toUpperCase().startsWith("--FROM"));
+  const from = process.argv.slice(2).find(x => x.toUpperCase().startsWith("FROM"));
+  console.log(process.argv);
   return from && from.split("=")[1];
 }
 
 function getTo() {
-  const to = process.argv.slice(2).find(x => x.toUpperCase().startsWith("--TO"));
+  const to = process.argv.slice(2).find(x => x.toUpperCase().startsWith("TO"));
   return to && to.split("=")[1];
 }
 
