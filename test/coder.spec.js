@@ -25,6 +25,11 @@ describe("coder", () => {
       const key = resolveKey();
       expect(key).to.equal("123");
     });
+    it("should use the argument key if explicit key was passed in", () => {
+      const { resolveKey } = require("../src/coder");
+      const key = resolveKey("foo");
+      expect(key).to.equal("foo");
+    });
     it("should throw error if no KEY in config and no CODER_KEY in process.env", () => {
       fakeConfig = sinon.stub(require("../src/config"), "KEY").value(undefined);
       const { resolveKey } = require("../src/coder");
