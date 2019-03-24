@@ -22,7 +22,7 @@ function resolveKey(key) {
   return key;
 }
 
-async function decode(encodedPath = ENCODED_PATH, decodedPath = DECODED_PATH, key = KEY) {
+async function decode(encodedPath = ENCODED_PATH, decodedPath = DECODED_PATH, key) {
   if (!Fs.existsSync(encodedPath)) {
     throw new Error(`${encodedPath} is missing`);
   }
@@ -34,7 +34,7 @@ async function decode(encodedPath = ENCODED_PATH, decodedPath = DECODED_PATH, ke
   return coder(resolveKey(key), encodedPath, decodedPath);
 }
 
-async function encode(decodedPath = DECODED_PATH, encodedPath = ENCODED_PATH, key = KEY) {
+async function encode(decodedPath = DECODED_PATH, encodedPath = ENCODED_PATH, key) {
   if (!Fs.existsSync(decodedPath)) {
     throw new Error(`${decodedPath} is missing`);
   }
@@ -56,8 +56,8 @@ async function coder(key, from, to) {
   await writeFile(to, _buf).catch(err => {
     throw err;
   });
-  console.log(`${fgGreen}${fgBright}   -- finished${reset}`);
-  return "finished";
+  console.log(`${fgGreen}${fgBright}   -- code from ${from} to ${to} finished${reset}`);
+  return 0;
 }
 
 module.exports = {
