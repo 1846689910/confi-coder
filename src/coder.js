@@ -56,7 +56,7 @@ async function coder(key, from, to) {
   await writeFile(to, _buf).catch(err => {
     throw err;
   });
-  console.log(`${fgGreen}${fgBright}   -- code from ${from} to ${to} finished${reset}`);
+  console.log(`${fgGreen}${fgBright}--code from\n\t${from}\n  to\n\t${to}\n  finished${reset}`);
   return 0;
 }
 
