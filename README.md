@@ -11,7 +11,7 @@ confidential file encoder and decoder with MD5 and bitwise encription method.
 configure `CODER_KEY`, default `ENCODED_PATH` and default `DECODED_PATH` within `./src/config.js`
 
 ```js
-const { encode, decode } = require("./src/coder.js");
+const { encode, decode } = require("confi-coder/src/coder.js");
 decode();  // or decode(fromPath, toPath);
 encode();  // or encode(fromPath, toPath);
 ```
